@@ -20,6 +20,7 @@ function App() {
 
   useEffect(() => {
     if (!query) return;
+
     const getImages = async () => {
       try {
         setIsError(false);

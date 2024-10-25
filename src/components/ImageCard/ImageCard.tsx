@@ -1,6 +1,12 @@
 import css from "./ImageCard.module.css";
 
-const ImageCard = ({ description, urlSmall, openModal }) => {
+type Props = {
+  description: string;
+  urlSmall: string;
+  openModal: boolean;
+};
+
+const ImageCard = ({ description, urlSmall, openModal }: Props) => {
   return (
     <>
       <img
