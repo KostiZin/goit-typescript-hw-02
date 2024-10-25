@@ -2,6 +2,7 @@ import { Field, Form, Formik } from "formik";
 import css from "./SearchBar.module.css";
 import { TbPhotoSearch } from "react-icons/tb";
 import toast, { Toaster } from "react-hot-toast";
+import { FormEvent } from "react";
 
 const SearchBar = ({ setQuery }) => {
   const initialValue = {

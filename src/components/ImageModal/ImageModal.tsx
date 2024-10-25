@@ -1,20 +1,17 @@
+import { FC } from "react";
 import css from "./ImageModal.module.css";
 import Modal from "react-modal";
+import { ImageResults } from "../App/App.types";
 
 Modal.setAppElement("#root");
 
-type Props = {
+interface ModalProps {
   isOpen: boolean;
-  closeModal: boolean;
-  selectedImage: {
-    urls: string;
-    alt_description: string;
-    likes: number;
-    user: string;
-  };
-};
+  closeModal: () => void;
+  selectedImage: ImageResults | null;
+}
 
-const ImageModal = ({ isOpen, closeModal, selectedImage }: Props) => {
+const ImageModal: FC<ModalProps> = ({ isOpen, closeModal, selectedImage }) => {
   if (!selectedImage) return null;
 
   const { urls, alt_description, likes, user } = selectedImage;

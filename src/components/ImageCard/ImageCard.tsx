@@ -1,12 +1,18 @@
+import { FC } from "react";
 import css from "./ImageCard.module.css";
+import { ImageResults } from "../App/App.types";
 
-type Props = {
+interface ImageCardProps {
   description: string;
   urlSmall: string;
-  openModal: boolean;
-};
+  openModal: () => void;
+}
 
-const ImageCard = ({ description, urlSmall, openModal }: Props) => {
+const ImageCard: FC<ImageCardProps> = ({
+  description,
+  urlSmall,
+  openModal,
+}) => {
   return (
     <>
       <img

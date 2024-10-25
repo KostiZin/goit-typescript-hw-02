@@ -7,16 +7,17 @@ import SearchBar from "../SearchBar/SearchBar";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 import css from "./App.module.css";
 import ImageModal from "../ImageModal/ImageModal";
+import { Image, ImageResults } from "./App.types";
 
 function App() {
-  const [images, setImages] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [page, setPage] = useState(1);
-  const [query, setQuery] = useState("");
-  const [totalPage, setTotalPages] = useState(0);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState("");
+  const [images, setImages] = useState<ImageResults[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [query, setQuery] = useState<string>("");
+  const [totalPage, setTotalPages] = useState<number>(0);
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [selectedImage, setSelectedImage] = useState<ImageResults | null>(null);
 
   useEffect(() => {
     if (!query) return;
@@ -27,7 +28,7 @@ function App() {
 
         setIsLoading(true);
 
-        const data = await fetchImages(page, query);
+        const data: Image = await fetchImages(page, query);
 
         setImages((prev) => [...prev, ...data.results]);
         setTotalPages(data.total_pages);
@@ -44,7 +45,7 @@ function App() {
     setPage((prev) => prev + 1);
   };
 
-  const handleSetQuery = (searchValue) => {
+  const handleSetQuery = (searchValue: string) => {
     if (query === searchValue) {
       return;
     }
@@ -54,14 +55,14 @@ function App() {
     setPage(1);
   };
 
-  const openModal = (imageSource) => {
+  const openModal = (imageSource: ImageResults) => {
     setSelectedImage(imageSource);
     setModalIsOpen(true);
   };
 
   const closeModal = () => {
     setModalIsOpen(false);
-    setSelectedImage("");
+    setSelectedImage(null);
   };
 
   return (
