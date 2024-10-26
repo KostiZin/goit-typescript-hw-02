@@ -1,10 +1,17 @@
 import axios from "axios";
+import { ImageResults } from "../components/App/App.types";
 
-export const fetchImages = async <T>(
+interface ApiResponse {
+  results: ImageResults[];
+  total: number;
+  total_pages: number;
+}
+
+export const fetchImages = async (
   page: number = 1,
   query: string
-): Promise<T> => {
-  const { data } = await axios.get<T>(
+): Promise<ApiResponse> => {
+  const { data } = await axios.get<ApiResponse>(
     `https://api.unsplash.com/search/photos?page=${page}&query=${query}&per_page=12&orientation=landscape&client_id=mS-dGrwvQX2GrdOFtnC-D27IiL42MVJH3DXgYTQJSww`
   );
 
