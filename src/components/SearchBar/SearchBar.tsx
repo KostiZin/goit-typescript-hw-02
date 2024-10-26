@@ -2,14 +2,22 @@ import { Field, Form, Formik } from "formik";
 import css from "./SearchBar.module.css";
 import { TbPhotoSearch } from "react-icons/tb";
 import toast, { Toaster } from "react-hot-toast";
-import { FormEvent } from "react";
+import { FC, FormEvent } from "react";
 
-const SearchBar = ({ setQuery }) => {
-  const initialValue = {
+interface SearchBarProps {
+  setQuery: (searchValue: string) => void;
+}
+
+type Values = {
+  query: string;
+};
+
+const SearchBar: FC<SearchBarProps> = ({ setQuery }) => {
+  const initialValue: Values = {
     query: "",
   };
 
-  const handleSubmit = (values) => {
+  const handleSubmit = (values: Values) => {
     values.query === ""
       ? toast.error("Oops, the search field is empty", { icon: "😱" })
       : setQuery(values.query);
@@ -19,11 +27,7 @@ const SearchBar = ({ setQuery }) => {
     <div>
       <Toaster position="top-right" reverseOrder={false} />
 
-      <Formik
-        initialValues={initialValue}
-        onSubmit={handleSubmit}
-        // className={css.formWrapper}
-      >
+      <Formik initialValues={initialValue} onSubmit={handleSubmit}>
         <Form className={css.form}>
           <Field
             className={css.input}
